@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html5 video/audio  视频/音频</title>
+</head>
+<body id="body">
+	<header>
+		<video width="320" height="240" controls autoplay id="video">
+			<source src="./movie.mp4" type="video/mp4">
+			<source src="./movie.ogg" type="video/ogg">
+				您的浏览器不支持 HTML5 video 标签。
+		</video>
+		<button id="btn">重新加载视频</button>
+		<button id="start">播放</button>
+		<button id="stop">暂停</button>
+	</header>
+	<section>
+		<audio controls>
+			<source src="audio.mp3" type="audio/mp3">
+				您的浏览器不支持 HTML5 audio 标签。
+		</audio>
+	</section>
+	<script>
+		var isSuport=document.getElementById('video').canPlayType('video/ogg');
+		console.log('是否支持该视频格式isSuport:',isSuport,'注：maybe:最有可能支持；“”不支持');
+		document.getElementById('btn').onclick=function(){
+			document.getElementById('video').load();
+		};
+		var video=document.getElementById('video');
+		document.getElementById('start').onclick=function(){
+			video.play();
+			console.log(video.currentTime,video.currentSrc);
+			console.log('播放速度：',video.defaultPlaybackRate);
+			console.log('视频长度',video.duration);
+			console.log('视频网络状态：',video.networkState);
+			console.log('视频就绪状态：',video.readyState);
+			console.log('视频当前来源：',video.src);
+		}
+		document.getElementById('stop').onclick=function(){
+			video.pause();
+			console.log('视频网络状态：',video.networkState);
+			console.log('视频就绪状态：',video.readyState);
+		}
+		// video.controls=false;//进度条
+		video.autoplay=false;//控制自动播放
+		video.controller={};//主流浏览器都不支持
+		video.preload='metadata';
+		console.log('autoplay:',video.autoplay);
+		console.log('controller:',video.controller);
+		console.log('currentSrc:',video.currentSrc);
+		console.log('视频长度duration:',video.duration);
+		console.log('视频网络状态:',video.networkState,'注：3-视频未找到');
+		console.log('视频是否在页面加载时加载:',video.preload);
+		console.log('视频就绪状态：:',video.readyState);
+		console.log('视频当前来源:',video.src);
+		video.oncanplaythrough=function(){
+			console.log('oncanplaythrough:','浏览器预计能够在不停下来进行缓冲的情况下持续播放指定的音频/视频');
+		}
+		video.oncanplay=function(){
+			console.log('oncanplay:','当前浏览器可以播放视频');
+		};
+		video.ondurationchange=function(){
+			console.log('ondurationchange:','指定音频/视频的时长数据发生变化时');
+		}
+		video.onloadedmetadata=function(){
+			console.log('onloadedmetadata:','音频/视频的元数据已加载时');
+		}
+		video.onloadeddata=function(){
+			console.log('onloadeddata:','当前帧的数据已加载，但没有足够的数据来播放指定音频/视频的下一帧');
+		}
+		video.onloadstart=function(){
+			console.log('onloadstart:','浏览器开始寻找指定的音频/视频时')
+		}
+		video.onprogress=function(){
+			console.log('onprogress:','视频正在下载中');
+		}
+		video.onended=function(){
+			console.log('onended:','播放结束');
+		}
+		video.onseeked=function(){
+			console.log('onseeked:','当用户已移动/跳跃到音频/视频中的新位置时触发。');
+		}
+	</script>
+</body>
+</html>
