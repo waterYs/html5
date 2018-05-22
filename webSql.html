@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html5 webSql</title>
+</head>
+<body>
+	<script>
+		var db=null;
+		db=openDatabase('mydb','1.0','test db',2*1024*1024);
+		console.log(db);
+		var e_id=2,e_log='sql1';
+		db.transaction(function(txt){
+			txt.executeSql('DELETE FROM LOGS');
+			txt.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id uniqu,log)');
+			txt.executeSql('INSERT INTO LOGS (id,log) VALUES (1,"html5 sql1")');
+			// txt.executeSql('INSERT INTO LOGS (id,log) VALUES (2,"html5 sql2")');
+			txt.executeSql('INSERT INTO LOGS (id,log) VALUES (?,?)',[e_id,e_log]);
+		})
+		db.transaction(function(txt){
+			console.log('txt1:',txt);
+			txt.executeSql('SELECT * FROM LOGS',[],function(txt,res){
+				console.log('txt2:',txt);
+				console.log('res:',res);
+				var len=res.rows.length,i;
+				var msg = "<p>查询记录条数: " + len + "</p>";
+      			// document.querySelector('#status').innerHTML +=  msg;
+      			console.log('msg:',msg);
+				for (i = 0; i < len; i++){
+					console.log('res.rows.item(i).log:',res.rows.item(i).log);
+		      	}
+			},null);
+		})
+		db.transaction(function(txt){
+			txt.executeSql('DELETE FROM LOGS WHERE id=1');			
+			txt.executeSql('UPDATE LOGS SET log="sql2" WHERE id=2');
+		})
+		db=null;
+	</script>
+</body>
+</html>
