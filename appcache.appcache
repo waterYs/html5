@@ -1,0 +1,9 @@
+CACHE MANIFEST
+movie.mp4
+auido.mp3
+
+NETWORK:
+1.html
+
+FALLBACK:
+video.html

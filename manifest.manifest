@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#2018/5/20
+CACHE:
+/movie.mp4
+/auido.mp3
+/test.css
+
+NETWORK:
+1.html
+
+FALLBACK:
+video.html
