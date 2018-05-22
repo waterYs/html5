@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html5 canvas画布</title>
+	<style>
+		*{margin:0;padding:0;}
+	</style>
+	<!-- <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script> -->
+</head>
+<body>
+	<canvas id="canvas" width="1366" height="700" style="background-color:red;border:1px solid black;">
+		您的浏览器不支持 HTML5 canvas 标签。
+	</canvas>
+	<img src="img.jpg" alt="" id="img" width="200" height="auto" crossOrigin='Anonymous'>
+	<img src="img.jpg" alt="" id="img1">
+	<script>
+		var canvas=document.getElementById('canvas');
+		var canvasTxt=canvas.getContext('2d');
+		canvasTxt.fillStyle='green';
+		canvasTxt.fillRect(0,0,100,100);//从左上角0,0开始画一个100*100(长*宽)的矩形
+		canvasTxt.moveTo(0,0);
+		canvasTxt.lineTo(100,100);//线条
+		canvasTxt.stroke();
+		canvasTxt.beginPath();
+		canvasTxt.arc(100,100,50,0,2*Math.PI,false);//圆 中心(100,100) 半径：50 0起始角 2*Math.PI结束角
+		canvasTxt.stroke();
+		canvasTxt.font='60px Arial';
+		canvasTxt.fillText('Hello Canvas!',200,100);
+		canvasTxt.strokeText('Hello Canvas!',0,200);//文字
+		var grd=canvasTxt.createLinearGradient(200,200,100,100);//创建渐变
+		grd.addColorStop(0,'white');
+		grd.addColorStop(1,'yellow');
+		canvasTxt.fillStyle=grd;
+		canvasTxt.fillRect(0,200,100,100);
+		// canvasTxt.clip();
+		var img=document.getElementById('img');
+		img.onload=function(){
+ 			canvasTxt.rect(300,300,150,200);
+ 			canvasTxt.stroke();
+ 			// canvasTxt.save();
+ 			canvasTxt.clip();
+ 			// canvasTxt.fillStyle="yellow";
+			// canvasTxt.fillRect(300,300,150,50);
+ 			// canvasTxt.drawImage(img,300,300);//绘制图像
+ 			var img1=document.getElementById('img1');
+			img1.src=canvas.toDataURL("image/png");
+ 			
+		}
+
+	</script>
+</body>
+</html>
