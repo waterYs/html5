@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>web storage</title>
+</head>
+<body>
+	<div id="demo">点击</div>
+	<script>
+		// console.log('typeof storage:',typeof storage);//undefined
+		// console.log('typeof localStorage:',typeof localStorage);//Object
+		// console.log('typeof sessionStorage:',typeof sessionStorage);//Object
+		if(typeof storage!=undefined){
+			localStorage.userName='water';
+			localStorage.age=27;
+			localStorage.setItem('userName1','water1');
+			// localStorage.clear();
+			console.log('localStorage userName:',localStorage.userName);
+			console.log('localStorage getItem:',localStorage.getItem('userName1'));
+			console.log('localStorage key(index):',localStorage.key(0));
+			console.log('localStorage clickcount:',localStorage.clickcount);
+			// sessionStorage.userName='water';
+			// sessionStorage.age=29;
+			console.log('sessionStorage userName:',sessionStorage.userName);
+		}
+	</script>
+	<script>
+		document.getElementById('demo').onclick=function(){
+			console.log(Number(this.clickcount));
+		};
+		console.log('NaN=undefined',NaN=undefined);//undefined
+		console.log('NaN==undefined',NaN==undefined);//false
+		console.log('NaN===undefined',NaN===undefined);//false
+		// console.log('null=undefined:',null=undefined);//报错
+		console.log('null==undefined:',null==undefined);//true
+		console.log('null===undefined:',null===undefined);//false
+	</script>
+</body>
+</html>
