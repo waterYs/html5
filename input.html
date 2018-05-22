@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html5 input</title>
+</head>
+<body>
+	<form action="">
+		<input type="text" value="2" pattern='2'>
+		<input type="password" value="密码">
+		<input type="radio">单选
+		<input type="checkbox">多选
+		<input type="file" id="file" alt="img1">
+		<input type="color" name="color">颜色
+		<input type="date" step='-'>时间
+		<input type="datetime">日期
+		<input type="datetime-local">本地时间
+		<input type="email">邮箱
+		<input type="month">月份
+		<input type="range">滑块
+		<input type="search">搜索
+		<input type="tel">电话
+		<input type="url">地址
+		<input type="submit">
+	</form>
+	<div id="img"></div>	
+	<script>
+		var file=document.getElementById('file');
+		file.onchange=function(){
+			console.log('file:',this.files[0]);
+			var img='<img src="'+this.files[0].name+'">';
+			document.getElementById('img').innerHTML=img;
+			var reader = new FileReader();   
+            reader.onload = function (e) {                                        
+                var imgURL = e.target.result;  
+                console.log('imgURL:',imgURL);  
+            };  
+		}
+	</script>
+</body>
+</html>
